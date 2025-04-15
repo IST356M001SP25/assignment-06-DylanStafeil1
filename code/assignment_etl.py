@@ -35,7 +35,7 @@ def reviews_step(place_ids: str|pd.DataFrame) -> pd.DataFrame:
     # Iterate through each place_id in the DataFrame
     for index, row in place_ids_df.iterrows():
         # Extract the place_id
-        place_id = row['place_id']
+        place_id = row['Google Place ID'] 
         # Call the Google Places API to get the place details and reviews
         response = get_google_place_details(place_id)
         # Check if 'result' key exists in the response
@@ -98,7 +98,10 @@ def sentiment_step(reviews: str|pd.DataFrame) -> pd.DataFrame:
     sentences_df = pd.json_normalize(sentiment_df['sentences'])
 
     # Concatenate the sentences DataFrame with the original DataFrame
-    sentiment_df = pd.concat([sentiment_df.drop(columns=['sentences']), sentences_df], axis=1)
+    sentiment_df = pd.concat([
+        sentiment_df.drop(columns=['sentences']).reset_index(drop=True),
+        sentences_df.reset_index(drop=True)
+    ], axis=1)
 
     # Rename the columns
     sentiment_df.rename(columns={
@@ -110,9 +113,9 @@ def sentiment_step(reviews: str|pd.DataFrame) -> pd.DataFrame:
     }, inplace=True)
 
     # Filter the DataFrame to keep only the relevant columns
-    sentiment_df = sentiment_df[['place_id', 'name', 'author_name', 'rating', 'text', 'sentiment', 
-                                  'confidenceScores_positive', 'confidenceScores_neutral', 
-                                  'confidenceScores_negative']]
+    sentiment_df = sentiment_df[['place_id', 'name', 'author_name', 'rating', 'sentence_text', 'sentence_sentiment', 
+                             'confidenceScores_positive', 'confidenceScores_neutral', 
+                             'confidenceScores_negative']]
     
     # Write the DataFrame to a CSV file
     sentiment_df.to_csv(CACHE_SENTIMENT_FILE, index=False)
