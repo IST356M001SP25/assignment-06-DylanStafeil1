@@ -30,7 +30,7 @@ def test_sentiment_step_output():
     file = etl.CACHE_SENTIMENT_FILE
 
     lines = 80
-    cols = [ c.strip().lower() for c in "place_id,name,author_name,rating,sentence_text,sentence_sentiment,confidenceScores.positive,confidenceScores.neutral,confidenceScores.negative".split(",")]
+    cols = [ c.strip().lower() for c in "place_id,name,author_name,rating,sentence_text,sentence_sentiment,confidenceScores_positive,confidenceScores_neutral,confidenceScores_negative".split(",")]
 
     print(f"TESTING: {file} file exists")
     assert os.path.exists(file)

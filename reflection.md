@@ -22,4 +22,4 @@ Examples:
 **Best Reflection** "I learned when to use while vs for loops. While loops are for sentiel-controlled values (waiting for a condition to occur), vs for loops are for iterating over collections of fixed values."
 
 `--- Reflection Below This Line ---`
-I learned how to use API's to 
+This assignment helped me understand how to build a multi-step ETL pipeline using real-world APIs. I learned how to break down a complex problem into manageable steps, caching intermediate outputs to avoid repeated API calls and make debugging easier. Working with both the Google Places and Azure APIs gave me hands-on experience with extracting and transforming unstructured data into a format ready for analysis. Overall, the assignment reinforced the value of structuring pipelines thoughtfully and writing modular, testable code.
